@@ -27,7 +27,7 @@ services:
       DB_USER: gonca_user
       DB_PASSWORD: gonca_pass_2024
       DB_NAME: gonca_db
-      JWT_SECRET: gonca_jwt_secret_change_me
+      JWT_SECRET: k234bk234kb2.23.rm23-23-232ef-23434ng
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       TZ: America/Argentina/Buenos_Aires
     depends_on:
