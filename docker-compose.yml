@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: gonca-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: gonca_root_2024
+      MYSQL_DATABASE: gonca_db
+      MYSQL_USER: gonca_user
+      MYSQL_PASSWORD: gonca_pass_2024
+    ports:
+      - "3306:3306"
+    volumes:
+      - gonca_mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  backend:
+    build: .
+    container_name: gonca-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_USER: gonca_user
+      DB_PASSWORD: gonca_pass_2024
+      DB_NAME: gonca_db
+      JWT_SECRET: gonca_jwt_secret_change_me
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      TZ: America/Argentina/Buenos_Aires
+    depends_on:
+      - mysql
+    volumes:
+      - ./uploads:/app/uploads
+
+volumes:
+  gonca_mysql_data:
